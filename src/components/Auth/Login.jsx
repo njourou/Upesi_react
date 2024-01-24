@@ -82,7 +82,7 @@ const LoginForm = () => {
           <button class="w-full bg-black text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300">Sign in</button>
             <button className="mb-6">
                <GoogleLogin
-                clientId="427221247899-t845r7r4keo2fj6fa7a4u63ickt17hd8.apps.googleusercontent.com"
+                 clientId="427221247899-t845r7r4keo2fj6fa7a4u63ickt17hd8.apps.googleusercontent.com"
                 buttonText="Sign in with Google"
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
