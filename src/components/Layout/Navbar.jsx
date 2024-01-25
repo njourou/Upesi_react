@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../slices/authSlice";
-import { FaSearch, FaFilter } from "react-icons/fa"; // Import search and filter icons
+import { FaSearch, FaFilter } from "react-icons/fa";
+import AddProductModal from '../../components/Product/AddProductModal';
 
 
 const Navbar = (props) => {
@@ -56,11 +57,21 @@ const Navbar = (props) => {
   const handleAccountDropdown = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+  const handleAddProduct = async (newProduct) => {
+    try {
+      await addProduct(newProduct);
+      setProducts([...products, newProduct]);
+      setIsModalOpen(false);
+      alert('New product Added!');
+    } catch (error) {
+      console.error('Error adding product:', error);
+    }
+  };
 
   const isLoginPage = location.pathname === "/login";
 
   if (isLoginPage) {
-    // Return null if it's the login page (to not render the Navbar)
+   
     return null;
   }
 
@@ -85,7 +96,7 @@ const Navbar = (props) => {
                 placeholder="Search"
                 value={searchQuery}
                 onChange={handleSearchInputChange}
-                className="border border-orange-300 rounded-md p-2 mr-1"
+                className="border border-pink-300 rounded-md p-2 mr-1"
               />
               <div className="absolute inset-y-0 right-0 flex items-center px-2">
                 <button
@@ -125,14 +136,13 @@ const Navbar = (props) => {
                       tabIndex="-1"
                     >
                       <div className="py-1" role="none">
-                        <Link
-                          to="/add-product"
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                          role="menuitem"
-                          tabIndex="-1"
-                        >
-                          Add Product
-                        </Link>
+                        <button
+            onClick={() => setIsModalOpen(true)}
+            
+            className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+          >
+            Add Product
+          </button>
                         <button
                           className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                           onClick={handleLogout}
@@ -145,11 +155,16 @@ const Navbar = (props) => {
                 </div>
               </div>
             </div>
+            
           )}
+          
         </div>
       </nav>
       <main>{props.children}</main>
+      
     </div>
+    
+    
   );
 };
 

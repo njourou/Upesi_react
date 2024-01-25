@@ -63,7 +63,7 @@ const EditProductForm = ({ product, formData, showUpdateForm, handleInputChange,
       </div>
 
       <button
-        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
         type="submit"
       >
         Update Product
