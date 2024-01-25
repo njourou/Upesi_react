@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 
 const AddProductModal = ({ isOpen, onClose, onAddProduct }) => {
   const [newProduct, setNewProduct] = useState({
-    title: '',
+    productName: '',
     price: '',
     category: '',
     description: '',
+    image: null,
   });
 
   const handleInputChange = (e) => {
@@ -13,17 +14,20 @@ const AddProductModal = ({ isOpen, onClose, onAddProduct }) => {
     setNewProduct({ ...newProduct, [name]: value });
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setNewProduct({ ...newProduct, image: file });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onAddProduct(newProduct);
-  };
-
-  const handleCancel = () => {
     setNewProduct({
-      title: '',
+      productName: '',
       price: '',
       category: '',
       description: '',
+      image: null,
     });
     onClose();
   };
@@ -48,85 +52,88 @@ const AddProductModal = ({ isOpen, onClose, onAddProduct }) => {
           aria-modal="true"
           aria-labelledby="modal-headline"
         >
-          <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <h2 className="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
+          <div className="bg-white px-8 pt-6 pb-8 mb-4">
+            <h2 className="text-xl leading-6 font-bold text-gray-900" id="modal-headline">
               Add a Product
             </h2>
-            <div className="mt-2">
-              <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
-                    Title
-                  </label>
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="title"
-                    type="text"
-                    name="title"
-                    value={newProduct.title}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="price">
-                    Price
-                  </label>
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="price"
-                    type="number"
-                    name="price"
-                    value={newProduct.price}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="category">
-                    Category
-                  </label>
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="category"
-                    type="text"
-                    name="category"
-                    value={newProduct.category}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-                    Description
-                  </label>
-                  <textarea
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="description"
-                    name="description"
-                    value={newProduct.description}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-                
-                <div className="flex items-center justify-between">
-                  <button
-                    type="submit"
-                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-                  >
-                    Add
-                  </button>
-                  <button
-                    type="button"
-                    className="bg-pink-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                    onClick={handleCancel}
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </form>
-            </div>
+            <form onSubmit={handleSubmit} className="mt-4">
+              <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="productName">
+                  Product Name
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="productName"
+                  type="text"
+                  name="productName"
+                  value={newProduct.productName}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="price">
+                  Price
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="price"
+                  type="number"
+                  name="price"
+                  value={newProduct.price}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="category">
+                  Category
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="category"
+                  type="text"
+                  name="category"
+                  value={newProduct.category}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
+                  Description
+                </label>
+                <textarea
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="description"
+                  name="description"
+                  value={newProduct.description}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="image">
+                  Image
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="image"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  required
+                />
+              </div>
+              <div className="flex items-center justify-center">
+                <button
+                  type="submit"
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                >
+                  Add Product
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
