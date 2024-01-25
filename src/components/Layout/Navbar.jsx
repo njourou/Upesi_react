@@ -82,7 +82,7 @@ const Navbar = (props) => {
           <div>
             <a href="/" className="flex items-center">
               <img
-                src="/src/assets/logo.png"
+                src="https://bonganasi.co.ke/assets/logo.png"
                 className="h-12 mr-3"
                 alt="Upesi"
               />
