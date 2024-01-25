@@ -73,7 +73,7 @@ const Navbar = (props) => {
               <img
                 src="/src/assets/logo.png"
                 className="h-12 mr-3"
-                alt="Flowbite Logo"
+                alt="Upesi"
               />
             </a>
           </div>
