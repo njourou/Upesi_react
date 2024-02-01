@@ -4,7 +4,7 @@ const Footer = () => {
   const footerStyle = {
     backgroundColor: 'black',
     color: 'white',
-    padding: '60px',
+    padding: '40px',
     textAlign: 'center',
   };
 
