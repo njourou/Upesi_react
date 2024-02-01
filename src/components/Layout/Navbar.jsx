@@ -112,7 +112,7 @@ const Navbar = (props) => {
               onClick={() => handleFilter()}
             >
               <FaFilter className="mr-2" />
-              Filter
+              Search
             </button>
           </div>
 
